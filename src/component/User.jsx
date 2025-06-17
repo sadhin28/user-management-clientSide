@@ -1,11 +1,28 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const User = () => {
+    const [user,setuser]=useState()
     const data = useLoaderData()
-    console.log(data)
+   
+    const handelSubmit=(e)=>{
+        e.preventDefault()
+        const form = e.target;
+        const name=form.name.value;
+        const email=form.email.value
+        const user ={name,email}
+        console.log(user)
+        fetch('http://localhost:5000/users',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+    }
     return (
         <div className="">
-            <form  className="grid py-20 card-body max-w-6/12 md:w-3/12  mx-auto items-center  mt-20 bg-gray-50 p-10 shadow-2xs gap-2 rounded-2xl">
+            <form onSubmit={handelSubmit} className="grid py-20 border-2  card-body max-w-6/12 md:w-3/12  mx-auto items-center  mt-20 bg-gray-50 p-10 shadow-2xs gap-2 rounded-2xl">
                 <input type="text" placeholder="Your name" name="name" className="border-black border-2 h-10 rounded-xl p-2"/>
                 <input type="email" placeholder="youremail@gmail.com" name="email" id="" className="border-black border-2 h-10 rounded-xl p-2" />
                 <br />
