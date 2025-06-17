@@ -8,7 +8,7 @@ const Root = () => {
     return (
         <div>
             <Headernav></Headernav>
-            <main>
+            <main className='min-h-[calc(100vh-290px)]'>
                 <Outlet></Outlet>
             </main>
             <footer>
