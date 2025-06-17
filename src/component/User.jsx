@@ -1,24 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const User = () => {
-    const [user,setuser]=useState()
-    const data = useLoaderData()
-   
+    
+    const [User,setuser]=useState([])
+    console.log(User)
+    const users=useLoaderData()
+    useEffect(()=>{
+        setuser(users)
+    },[])
+    
     const handelSubmit=(e)=>{
         e.preventDefault()
         const form = e.target;
         const name=form.name.value;
         const email=form.email.value
         const user ={name,email}
-        console.log(user)
+    
         fetch('http://localhost:5000/users',{
             method:'POST',
+            body:JSON.stringify(user),
             headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(user)
+                 "Content-type": "application/json; charset=UTF-8"
+            }
+            
         })
+        .then(res=>res.json())
+        .then(datas =>{
+           const newuser =[...User,datas];
+           setuser(newuser)
+           form.reset()
+        })
+        
     }
     return (
         <div className="">
@@ -29,7 +42,7 @@ const User = () => {
                 <input type="submit" value='Add User' name="Submit" className="border-black h-10 hover:bg-blue-700 hover:text-white hover:font-bold bg-purple-500 rounded-xl p-2" />
             </form>
             {
-                data.map(data=><div>
+                User.map(data=><div>
                     
                     <p key={data.id}>{data.id} : {data.name}</p>
                     
