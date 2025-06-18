@@ -2,8 +2,13 @@ import React, { use, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 const Addnewuser = () => {
-   
-    const handelSubmit=(e)=>{
+     const [user,setuser]=useState([])
+      const mongoData= useLoaderData();
+     useEffect(()=>{
+       
+        setuser(mongoData)
+    },[])
+      const handelSubmit=(e)=>{
         e.preventDefault();
        const form = e.target;
        const name= form.name.value;
@@ -18,17 +23,15 @@ const Addnewuser = () => {
             }
       })
       .then(res=>res.json())
-      .then(data=>{
-        console.log(data)
-      })
+      .then(datas =>{
+           const newuser =[...user,datas];
+           setuser(newuser)
+           form.reset()
+        })
     }
-    const [user,setuser]=useState([])
-
-     const mongoData= useLoaderData();
-    useEffect(()=>{
-       
-        setuser(mongoData)
-    },[])
+  
+    
+    
     return (
         <div>
            <div>
