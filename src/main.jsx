@@ -10,6 +10,7 @@ import Root from './component/Root.jsx';
 import Allphones from './component/Allphones.jsx';
 import Detailsphone from './component/Detailsphone.jsx';
 import User from './component/User.jsx';
+import Addnewuser from './component/Addnewuser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
         path:'/user',
         element:<User></User>,
         loader:()=>fetch('http://localhost:5000/users')
+      },{
+        path:"//addUser",
+        element:<Addnewuser></Addnewuser>
       }
     ]
   },

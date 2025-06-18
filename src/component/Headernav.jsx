@@ -15,6 +15,10 @@ const Headernav = () => {
       link:'/phones',
       name:'All Phones'
     },
+    {
+      link:'/addUser',
+      name:'Add New User'
+    },
     
   ]
     return (
