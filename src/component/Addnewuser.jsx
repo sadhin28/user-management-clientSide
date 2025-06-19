@@ -30,8 +30,21 @@ const Addnewuser = () => {
         })
     }
   
-    const handelDelateData=(id)=>{
-        console.log(id)
+    const handelDelateData=(_id)=>{
+        console.log(_id)
+        fetch(`http://localhost:5000/user/${_id}`,{
+          method:'DELETE',
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+          if(data.deletedCoun > 0){
+            alert('Deleted Successfull')
+          }else{
+            alert("Delete not successfull")
+          }
+        })
+       
     }
     
     return (
