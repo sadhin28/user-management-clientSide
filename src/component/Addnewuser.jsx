@@ -39,9 +39,14 @@ const Addnewuser = () => {
         .then(data=>{
           console.log(data);
           if(data.deletedCoun > 0){
+             
+             alert("Delete not successfull")
+             const newuser =[...user,data.name];
+             setuser(newuser)
+           
+            }else{
             alert('Deleted Successfull')
-          }else{
-            alert("Delete not successfull")
+           
           }
         })
        
