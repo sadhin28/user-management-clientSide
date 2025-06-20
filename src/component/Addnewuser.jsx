@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Addnewuser = () => {
      const mongoData= useLoaderData();
@@ -55,7 +55,13 @@ const Addnewuser = () => {
         <div>
            <div>
              {
-              users.map(data=><li key={data._id}>{data.name}<button onClick={()=>handelDelateData(data._id)} className='btn mx-5 btn-circle bg-amber-600 hover:bg-amber-800'>X</button></li>)
+              users.map(data=><li key={data._id}>
+                <Link to={`/update/${data._id}`}>
+                  <button className='btn mx-2 bg-amber-600 hover:bg-amber-800'>Update User</button>
+                </Link>
+                {data.name}
+              
+              <button onClick={()=>handelDelateData(data._id)} className='btn mx-5 btn-circle bg-amber-600 hover:bg-amber-800'>X</button></li>)
             }
            </div>
              <form onSubmit={handelSubmit} className="grid py-20 border-2  card-body max-w-6/12 md:w-3/12  mx-auto items-center  mt-20 bg-gray-50 p-10 shadow-2xs gap-2 rounded-2xl">
