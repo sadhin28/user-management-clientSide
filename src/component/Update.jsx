@@ -3,8 +3,11 @@ import { useLoaderData } from 'react-router-dom';
 
 const Update = () => {
     const data = useLoaderData()
-    const handelSubmit=()=>{
-        
+    const handelSubmit=(e)=>{
+        e.preventDefault()
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
     }
     return (
         <div>
