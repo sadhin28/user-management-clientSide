@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 const Addnewuser = () => {
-     const [user,setuser]=useState([])
-     console.log(user)
-      const mongoData= useLoaderData();
-     useEffect(()=>{
-       
-        setuser(mongoData)
-    },[])
+     const mongoData= useLoaderData();
+     const [users,setuser]=useState(mongoData)
+      
+    
       const handelSubmit=(e)=>{
         e.preventDefault();
        const form = e.target;
@@ -25,9 +22,10 @@ const Addnewuser = () => {
       })
       .then(res=>res.json())
       .then(datas =>{
-        
-           const newuser =[...user,datas];
-           setuser(newuser)
+           const newUser = [...users,datas];
+           
+           console.log(newUser)
+           setuser(newUser)
            form.reset()
         })
     }
@@ -40,14 +38,12 @@ const Addnewuser = () => {
         .then(res=>res.json())
         .then(data=>{
           console.log(data);
-          if(data.deletedCoun > 0){
-             
-             alert("Delete not successfull")
-             const newuser =[...user,data.name];
-             setuser(newuser)
-             
-            }else{
+          if(data.deletedCount > 0){
             alert('Deleted Successfull')
+            const remaininguser = users.filter(user => user._id !== _id)
+            setuser(remaininguser)
+            }else{
+              alert("Delete not successfull")
             
           }
           
@@ -59,7 +55,7 @@ const Addnewuser = () => {
         <div>
            <div>
              {
-              user.map(data=><li key={data._id}>{data.name}<button onClick={()=>handelDelateData(data._id)} className='btn mx-5 btn-circle bg-amber-600 hover:bg-amber-800'>X</button></li>)
+              users.map(data=><li key={data._id}>{data.name}<button onClick={()=>handelDelateData(data._id)} className='btn mx-5 btn-circle bg-amber-600 hover:bg-amber-800'>X</button></li>)
             }
            </div>
              <form onSubmit={handelSubmit} className="grid py-20 border-2  card-body max-w-6/12 md:w-3/12  mx-auto items-center  mt-20 bg-gray-50 p-10 shadow-2xs gap-2 rounded-2xl">
