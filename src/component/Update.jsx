@@ -1,13 +1,29 @@
-import React from 'react';
+
 import { useLoaderData } from 'react-router-dom';
 
 const Update = () => {
     const data = useLoaderData()
+    console.log(data)
     const handelSubmit=(e)=>{
+        
         e.preventDefault()
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
+        console.log(name,email)
+        const updateuser = {name,email}
+        console.log(updateuser)
+        fetch(`http://localhost:5000/userss/${data._id}`,{
+            method:"PUT",
+            headers:{
+                  "Content-type": "application/json; charset=UTF-8"
+            },
+            body:JSON.stringify(updateuser)
+        })
+        .then(res=>res.json())
+        .then(data=>{console.log(data)
+            form.reset()
+        })
     }
     return (
         <div>
