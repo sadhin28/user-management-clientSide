@@ -1,8 +1,9 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 const Addnewuser = () => {
      const [user,setuser]=useState([])
+     console.log(user)
       const mongoData= useLoaderData();
      useEffect(()=>{
        
@@ -24,6 +25,7 @@ const Addnewuser = () => {
       })
       .then(res=>res.json())
       .then(datas =>{
+        
            const newuser =[...user,datas];
            setuser(newuser)
            form.reset()
@@ -32,7 +34,7 @@ const Addnewuser = () => {
   
     const handelDelateData=(_id)=>{
         console.log(_id)
-        fetch(`http://localhost:5000/user/${_id}`,{
+        fetch(`http://localhost:5000/userss/${_id}`,{
           method:'DELETE',
         })
         .then(res=>res.json())
@@ -43,11 +45,12 @@ const Addnewuser = () => {
              alert("Delete not successfull")
              const newuser =[...user,data.name];
              setuser(newuser)
-           
+             
             }else{
             alert('Deleted Successfull')
-           
+            
           }
+          
         })
        
     }

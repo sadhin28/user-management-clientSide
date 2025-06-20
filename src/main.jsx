@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         loader:()=>fetch('http://localhost:5000/users')
       },{
         path:"//addUser",
-        loader:()=>fetch('http://localhost:5000/user'),
+        loader:()=>fetch('http://localhost:5000/userss'),
         element:<Addnewuser></Addnewuser>
       }
     ]
