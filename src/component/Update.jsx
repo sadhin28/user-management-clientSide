@@ -8,6 +8,7 @@ const Update = () => {
         
         e.preventDefault()
         const form = e.target;
+        
         const name = form.name.value;
         const email = form.email.value;
         console.log(name,email)
